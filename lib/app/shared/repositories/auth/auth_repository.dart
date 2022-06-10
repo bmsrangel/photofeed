@@ -1,5 +1,9 @@
-import 'package:photofeed/app/shared/modules/user_model.dart';
+import 'package:photofeed/app/shared/dtos/sign_up_dto.dart';
+
+import '../../models/user_model.dart';
 
 abstract class AuthRepository {
   Future<UserModel> loginWithEmailPassword(String email, String password);
+  Future<UserModel> loginWithGoogle();
+  Future<UserModel> signUpWithEmailPassword(SignUpDTO userData);
 }

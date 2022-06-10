@@ -11,7 +11,7 @@ class UserModel {
   final String id;
   final String displayName;
   final String email;
-  final String profileUrl;
+  final String? profileUrl;
 
   Map<String, dynamic> toMap() {
     return {
