@@ -5,6 +5,8 @@ import 'package:photofeed/app/modules/home/home_module.dart';
 import 'package:photofeed/app/modules/splash/splash_module.dart';
 import 'package:photofeed/app/shared/repositories/auth/auth_repository.dart';
 import 'package:photofeed/app/shared/repositories/auth/firebase_auth_repository_impl.dart';
+import 'package:photofeed/app/shared/services/current_user_service.dart';
+import 'package:photofeed/app/shared/services/firebase_auth_current_user_service_impl.dart';
 
 class AppModule extends Module {
   @override
@@ -14,6 +16,9 @@ class AppModule extends Module {
         FirebaseAuth.instance,
         GoogleSignIn(),
       ),
+    ),
+    Bind.lazySingleton<CurrentUserService>(
+      (i) => FirebaseAuthCurrentUserServiceImpl(FirebaseAuth.instance),
     ),
   ];
 
