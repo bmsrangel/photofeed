@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 
@@ -16,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Photofeed'),
+        title: const Text('PhotoFeed'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -25,10 +26,13 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               CustomTextFormField(
                 labelText: 'E-mail',
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
               ),
               const SizedBox(height: 10.0),
               CustomTextFormField(
                 labelText: 'Password',
+                obscureText: true,
               ),
               Align(
                 alignment: Alignment.centerRight,
@@ -61,7 +65,9 @@ class _LoginPageState extends State<LoginPage> {
               const Text('Don\'t have an account?'),
               TextButton(
                 child: const Text('Create one!'),
-                onPressed: () {},
+                onPressed: () {
+                  Modular.to.pushNamed('./signup');
+                },
               ),
             ],
           ),
