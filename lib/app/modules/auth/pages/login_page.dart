@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:photofeed/app/modules/auth/stores/obscure_text_store.dart';
-import 'package:photofeed/app/modules/auth/validators/custom_validators.dart';
 import 'package:photofeed/app/shared/stores/auth_store.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -103,22 +102,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     validator: Validatorless.multiple([
                       Validatorless.required('Campo obrigatório'),
-                      Validatorless.min(
-                        6,
-                        'A senha precisa ter no mínimo 6 caracteres',
-                      ),
-                      CustomValidators.containsNumberValidator(
-                        'A senha precisa ter pelo menos um número',
-                      ),
-                      CustomValidators.upperCaseCharacteresValidator(
-                        'A senha precisa ter pelo menos uma letra maiúscula',
-                      ),
-                      CustomValidators.lowerCaseCharacteresValidator(
-                        'A senha precisa ter pelo menos uma letra minúscula',
-                      ),
-                      CustomValidators.specialCharacteresValidator(
-                        'A senha não possui caracteres especiais',
-                      ),
                     ]),
                   ),
                 ),

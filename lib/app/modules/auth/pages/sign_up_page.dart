@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:photofeed/app/modules/auth/pages/widgets/custom_text_form_field.dart';
+import 'package:validatorless/validatorless.dart';
+
+import '../validators/custom_validators.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -31,6 +34,25 @@ class _SignUpPageState extends State<SignUpPage> {
             CustomTextFormField(
               labelText: 'Senha',
               obscureText: true,
+              validator: Validatorless.multiple([
+                Validatorless.required('Campo obrigatório'),
+                Validatorless.min(
+                  6,
+                  'A senha precisa ter no mínimo 6 caracteres',
+                ),
+                CustomValidators.containsNumberValidator(
+                  'A senha precisa ter pelo menos um número',
+                ),
+                CustomValidators.upperCaseCharacteresValidator(
+                  'A senha precisa ter pelo menos uma letra maiúscula',
+                ),
+                CustomValidators.lowerCaseCharacteresValidator(
+                  'A senha precisa ter pelo menos uma letra minúscula',
+                ),
+                CustomValidators.specialCharacteresValidator(
+                  'A senha não possui caracteres especiais',
+                ),
+              ]),
             ),
             const SizedBox(height: 10.0),
             CustomTextFormField(

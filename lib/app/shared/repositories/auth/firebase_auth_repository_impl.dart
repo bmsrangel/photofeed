@@ -91,4 +91,9 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       throw AuthException(e.code);
     }
   }
+
+  @override
+  Future<void> logout() async {
+    await _firebaseAuth.signOut();
+  }
 }
