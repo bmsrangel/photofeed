@@ -7,6 +7,7 @@ import 'package:photofeed/app/shared/repositories/auth/auth_repository.dart';
 import 'package:photofeed/app/shared/repositories/auth/firebase_auth_repository_impl.dart';
 import 'package:photofeed/app/shared/services/current_user_service.dart';
 import 'package:photofeed/app/shared/services/firebase_auth_current_user_service_impl.dart';
+import 'package:photofeed/app/shared/stores/auth_store.dart';
 
 class AppModule extends Module {
   @override
@@ -19,6 +20,12 @@ class AppModule extends Module {
     ),
     Bind.lazySingleton<CurrentUserService>(
       (i) => FirebaseAuthCurrentUserServiceImpl(FirebaseAuth.instance),
+    ),
+    Bind.lazySingleton(
+      (i) => AuthStore(
+        i<AuthRepository>(),
+        i<CurrentUserService>(),
+      ),
     ),
   ];
 
