@@ -56,4 +56,11 @@ class AuthStore extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> logout() async {
+    _authRepository.logout().then((_) {
+      user = null;
+      error = null;
+    });
+  }
 }

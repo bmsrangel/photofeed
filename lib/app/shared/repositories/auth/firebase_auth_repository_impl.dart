@@ -71,11 +71,17 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       );
       final user = credentials.user;
       await user!.updateDisplayName(userData.displayName);
+      final UserCredential updatedUserCredential =
+          await _firebaseAuth.signInWithEmailAndPassword(
+        email: userData.email,
+        password: userData.password,
+      );
+      final updatedUser = updatedUserCredential.user!;
       final userModel = UserModel(
-        id: user.uid,
-        displayName: user.displayName!,
-        email: user.email!,
-        profileUrl: user.photoURL,
+        id: updatedUser.uid,
+        displayName: updatedUser.displayName!,
+        email: updatedUser.email!,
+        profileUrl: updatedUser.photoURL,
       );
       return userModel;
     } on FirebaseAuthException catch (e) {

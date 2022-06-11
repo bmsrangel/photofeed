@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:photofeed/app/shared/stores/auth_store.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -10,6 +12,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final AuthStore _authStore;
+
+  @override
+  void initState() {
+    _authStore = Modular.get<AuthStore>();
+    super.initState();
+  }
+
   int _counter = 0;
 
   void _incrementCounter() {
@@ -23,6 +33,15 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              _authStore.logout();
+              Modular.to.navigate('/auth/');
+            },
+            icon: const Icon(Icons.exit_to_app),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
