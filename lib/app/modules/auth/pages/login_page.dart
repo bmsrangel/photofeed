@@ -20,57 +20,60 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text('PhotoFeed'),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              CustomTextFormField(
-                labelText: 'E-mail',
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-              ),
-              const SizedBox(height: 10.0),
-              CustomTextFormField(
-                labelText: 'Password',
-                obscureText: true,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Forgot your password?',
-                  ),
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            CustomTextFormField(
+              labelText: 'E-mail',
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+            ),
+            const SizedBox(height: 10.0),
+            CustomTextFormField(
+              labelText: 'Senha',
+              obscureText: true,
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {
+                  Modular.to.pushNamed('./reset');
+                },
+                child: const Text(
+                  'Esqueceu sua senha?',
                 ),
               ),
-              const SizedBox(height: 20.0),
-              FractionallySizedBox(
-                widthFactor: .6,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Login'),
-                ),
+            ),
+            const SizedBox(height: 20.0),
+            FractionallySizedBox(
+              widthFactor: .7,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text('Entrar'),
               ),
-              const SizedBox(height: 20.0),
-              const Text('Or'),
-              const SizedBox(height: 20.0),
-              SignInButton(
+            ),
+            const SizedBox(height: 20.0),
+            const Text('ou'),
+            const SizedBox(height: 20.0),
+            FractionallySizedBox(
+              widthFactor: .7,
+              child: SignInButton(
                 Buttons.Google,
-                text: 'Sign in with Google',
+                text: 'Entrar com conta Google',
                 shape: const StadiumBorder(),
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(3.0),
                 onPressed: () {},
               ),
-              const SizedBox(height: 40.0),
-              const Text('Don\'t have an account?'),
-              TextButton(
-                child: const Text('Create one!'),
-                onPressed: () {
-                  Modular.to.pushNamed('./signup');
-                },
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 40.0),
+            const Text('Não possui conta?'),
+            TextButton(
+              child: const Text('Crie a sua!'),
+              onPressed: () {
+                Modular.to.pushNamed('./signup');
+              },
+            ),
+          ],
         ),
       ),
     );

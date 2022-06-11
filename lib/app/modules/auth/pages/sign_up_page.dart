@@ -13,41 +13,39 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Account'),
+        title: const Text('Criar Conta'),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              CustomTextFormField(
-                labelText: 'Name',
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            CustomTextFormField(
+              labelText: 'Nome',
+            ),
+            const SizedBox(height: 10.0),
+            CustomTextFormField(
+              labelText: 'E-mail',
+              keyboardType: TextInputType.emailAddress,
+            ),
+            const SizedBox(height: 10.0),
+            CustomTextFormField(
+              labelText: 'Senha',
+              obscureText: true,
+            ),
+            const SizedBox(height: 10.0),
+            CustomTextFormField(
+              labelText: 'Confirmar Senha',
+              obscureText: true,
+            ),
+            const SizedBox(height: 30.0),
+            FractionallySizedBox(
+              widthFactor: .6,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text('Criar conta'),
               ),
-              const SizedBox(height: 10.0),
-              CustomTextFormField(
-                labelText: 'E-mail',
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 10.0),
-              CustomTextFormField(
-                labelText: 'Password',
-                obscureText: true,
-              ),
-              const SizedBox(height: 10.0),
-              CustomTextFormField(
-                labelText: 'Confirm Password',
-                obscureText: true,
-              ),
-              const SizedBox(height: 30.0),
-              FractionallySizedBox(
-                widthFactor: .6,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Create Account'),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
