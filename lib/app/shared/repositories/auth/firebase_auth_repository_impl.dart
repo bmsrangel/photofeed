@@ -82,4 +82,13 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       throw AuthException(e.code);
     }
   }
+
+  @override
+  Future<void> resetPassword(String email) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(e.code);
+    }
+  }
 }
