@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:photofeed/app/modules/auth/stores/obscure_text_store.dart';
 import 'package:photofeed/app/modules/auth/validators/custom_validators.dart';
 import 'package:photofeed/app/shared/stores/auth_store.dart';
 import 'package:validatorless/validatorless.dart';
@@ -17,6 +18,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   late final AuthStore _authStore;
+  late final ObscureTextStore _obscureTextStore;
 
   late final GlobalKey<FormState> _formKey;
   late final GlobalKey<ScaffoldMessengerState> _messengerKey;
@@ -27,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     _authStore = Modular.get<AuthStore>();
+    _obscureTextStore = Modular.get<ObscureTextStore>();
 
     _formKey = GlobalKey<FormState>();
     _messengerKey = GlobalKey<ScaffoldMessengerState>();
@@ -84,29 +87,40 @@ class _LoginPageState extends State<LoginPage> {
                   ]),
                 ),
                 const SizedBox(height: 10.0),
-                CustomTextFormField(
-                  labelText: 'Senha',
-                  obscureText: true,
-                  controller: _password$,
-                  validator: Validatorless.multiple([
-                    Validatorless.required('Campo obrigatório'),
-                    Validatorless.min(
-                      6,
-                      'A senha precisa ter no mínimo 6 caracteres',
+                AnimatedBuilder(
+                  animation: _obscureTextStore,
+                  builder: (_, __) => CustomTextFormField(
+                    labelText: 'Senha',
+                    obscureText: _obscureTextStore.obscureText,
+                    controller: _password$,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureTextStore.obscureText
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      onPressed: _obscureTextStore.toggleObscureText,
                     ),
-                    CustomValidators.containsNumberValidator(
-                      'A senha precisa ter pelo menos um número',
-                    ),
-                    CustomValidators.upperCaseCharacteresValidator(
-                      'A senha precisa ter pelo menos uma letra maiúscula',
-                    ),
-                    CustomValidators.lowerCaseCharacteresValidator(
-                      'A senha precisa ter pelo menos uma letra minúscula',
-                    ),
-                    CustomValidators.specialCharacteresValidator(
-                      'A senha não possui caracteres especiais',
-                    ),
-                  ]),
+                    validator: Validatorless.multiple([
+                      Validatorless.required('Campo obrigatório'),
+                      Validatorless.min(
+                        6,
+                        'A senha precisa ter no mínimo 6 caracteres',
+                      ),
+                      CustomValidators.containsNumberValidator(
+                        'A senha precisa ter pelo menos um número',
+                      ),
+                      CustomValidators.upperCaseCharacteresValidator(
+                        'A senha precisa ter pelo menos uma letra maiúscula',
+                      ),
+                      CustomValidators.lowerCaseCharacteresValidator(
+                        'A senha precisa ter pelo menos uma letra minúscula',
+                      ),
+                      CustomValidators.specialCharacteresValidator(
+                        'A senha não possui caracteres especiais',
+                      ),
+                    ]),
+                  ),
                 ),
                 Align(
                   alignment: Alignment.centerRight,

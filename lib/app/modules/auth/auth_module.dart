@@ -3,9 +3,13 @@ import 'package:photofeed/app/modules/auth/pages/login_page.dart';
 import 'package:photofeed/app/modules/auth/pages/reset_password_page.dart';
 import 'package:photofeed/app/modules/auth/pages/sign_up_page.dart';
 
+import 'stores/obscure_text_store.dart';
+
 class AuthModule extends Module {
   @override
-  final List<Bind> binds = [];
+  final List<Bind> binds = [
+    Bind.factory((i) => ObscureTextStore()),
+  ];
 
   @override
   final List<ModularRoute> routes = [
