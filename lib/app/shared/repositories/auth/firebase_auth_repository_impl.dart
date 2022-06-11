@@ -34,7 +34,7 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       );
       return userModel;
     } on FirebaseAuthException catch (e) {
-      throw AuthException(e.message);
+      throw AuthException(e.code);
     }
   }
 
@@ -58,7 +58,7 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       );
       return userModel;
     } on FirebaseAuthException catch (e) {
-      throw AuthException(e.message);
+      throw AuthException(e.code);
     }
   }
 
@@ -79,7 +79,7 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       );
       return userModel;
     } on FirebaseAuthException catch (e) {
-      throw AuthException(e.message);
+      throw AuthException(e.code);
     }
   }
 }
